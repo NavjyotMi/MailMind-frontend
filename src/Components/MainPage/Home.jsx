@@ -1,24 +1,42 @@
 import React, { useEffect } from "react";
+import { Link, Outlet } from "react-router-dom";
+import { useGetUserQuery } from "../../Store/User/UserApi";
+import { useDispatch } from "react-redux";
+import { addUserToSlice } from "../../Store/User/UserSlice";
+import NavBar from "./NavBar";
+import MainSection from "./MainSection";
 
-import axios from "axios";
 const Home = () => {
-  console.log("the component is being mounted");
-  useEffect(() => {
-    async function getuserInfo() {
-      // const data = await axios.get(
-      //   "http://localhost:5000/api/v1/auth/userinfo",
-      //   { withCredentials: true }
-      // );
-      const data = await axios.get(
-        "http://localhost:5000/api/v1/user/getmail",
-        { withCredentials: true }
-      );
+  const dispatch = useDispatch();
+  const { data, isError, isLoading, error } = useGetUserQuery();
 
+  useEffect(() => {
+    if (data) {
       console.log(data);
+      const obj = {
+        fname: data.fname,
+        lname: data.lname,
+        email: data.email,
+        picture: data.picture,
+        linkedAccounts: data.linkedAccounts,
+      };
+      dispatch(addUserToSlice(obj));
     }
-    getuserInfo();
-  }, []);
-  return <div>home</div>;
+  }, [data?.fname, dispatch]);
+
+  if (isError) {
+    console.error("API Error:", error);
+    return <div>Error: {error?.data?.message || "Something went wrong"}</div>;
+  }
+
+  if (isLoading) return <div>Loading</div>;
+  return (
+    <div className="flex flex-row gap-[10rem] h-screen ">
+      <NavBar />
+      <MainSection />
+    </div>
+  );
 };
 
 export default Home;
+Outlet;
