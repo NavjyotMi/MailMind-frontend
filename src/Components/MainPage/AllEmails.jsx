@@ -1,30 +1,47 @@
-import React from "react";
-import { useGetEmailsQuery } from "../../Store/Email/EmailApi";
+import React, { useEffect } from "react";
+import {
+  useGetCategorizedEmailMutation,
+  useGetEmailsQuery,
+} from "../../Store/Email/EmailApi";
 import { Link } from "react-router-dom";
-import { useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const AllEmails = () => {
-  const location = useLocation();
-  const { data, isError, isLoading, error } = useGetEmailsQuery();
-  if (data) {
-    console.log(data);
-  }
-  if (isError) {
-    console.error(error);
-  }
+  const activeaccount = useSelector((state) => state.active.activeAccount);
+  const { data, isError, isLoading, error } = useGetEmailsQuery(activeaccount, {
+    skip: !activeaccount,
+  });
+  const [categorizedEmails] = useGetCategorizedEmailMutation();
   const today = new Date();
-  console.log(today);
-  if (isLoading) return <div>Loading</div>;
+  if (isLoading) <div>Loading</div>;
+  useEffect(() => {
+    const fetchCategorizedEmails = async () => {
+      try {
+        const response = await categorizedEmails(data.email).unwrap();
+        console.log("Categorized Emails:", response);
+      } catch (err) {
+        console.error("Error categorizing emails:", err);
+      }
+    };
+
+    if (data?.email) fetchCategorizedEmails();
+  }, [data, categorizedEmails]);
+
   return (
     <>
       <div className="mt-[3%]">
         <div>
-          <input type="text" className="border-1" />
+          <input
+            type="text"
+            className="border-1"
+            placeholder="Search for email"
+          />
         </div>
         <div className="flex-grow h-[calc(100vh-50px)]">
           {data &&
-            data.email.map((ele) => (
+            data?.email.map((ele) => (
               <Link
+                key={ele.id}
                 to={`email/${ele.id}`}
                 className=" flex flex-row justify-between items-center border-b-1 py-1 pr-5"
               >

@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
-import { Link, Outlet } from "react-router-dom";
 import { useGetUserQuery } from "../../Store/User/UserApi";
 import { useDispatch } from "react-redux";
 import { addUserToSlice } from "../../Store/User/UserSlice";
 import NavBar from "./NavBar";
 import MainSection from "./MainSection";
+import { activeAcount } from "../../Store/Active/IsActive";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -21,6 +21,11 @@ const Home = () => {
         linkedAccounts: data.linkedAccounts,
       };
       dispatch(addUserToSlice(obj));
+      const obj1 = {
+        activeAccount: data.email,
+        mainAccount: data.email,
+      };
+      dispatch(activeAcount(obj1));
     }
   }, [data?.fname, dispatch]);
 
@@ -39,4 +44,3 @@ const Home = () => {
 };
 
 export default Home;
-Outlet;

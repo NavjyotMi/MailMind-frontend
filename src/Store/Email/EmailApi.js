@@ -8,10 +8,23 @@ const EmailApi = createApi({
   }),
   endpoints: (builder) => ({
     getEmails: builder.query({
-      query: () => "getmail",
+      query: (body) => ({ url: `getmail/?email=${encodeURIComponent(body)}` }),
       keepUnusedDataFor: 900,
+    }),
+    getSingleMail: builder.query({
+      query: (body) => ({
+        url: `email/?messageid=${encodeURIComponent(body)}`,
+      }),
+      keepUnusedDataFor: 900,
+    }),
+    getCategorizedEmail: builder.mutation({
+      query: (body) => ({
+        url: "categorize",
+        method: "POST",
+        body,
+      }),
     }),
   }),
 });
-export const { useGetEmailsQuery } = EmailApi;
+export const { useGetEmailsQuery, useGetCategorizedEmailMutation } = EmailApi;
 export default EmailApi;
