@@ -1,32 +1,21 @@
 import React, { useEffect } from "react";
-import {
-  useGetCategorizedEmailMutation,
-  useGetEmailsQuery,
-} from "../../Store/Email/EmailApi";
+import { useGetEmailsQuery } from "../../Store/Email/EmailApi";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import axios from "axios";
+import useWebSocketNotifications from "../Utils/useWebSocketClient";
 
 const AllEmails = () => {
   const activeaccount = useSelector((state) => state.active.activeAccount);
-  const { data, isError, isLoading, error } = useGetEmailsQuery(activeaccount, {
-    skip: !activeaccount,
-  });
-  const [categorizedEmails] = useGetCategorizedEmailMutation();
+  const { data, isError, isLoading, error, refetch } = useGetEmailsQuery(
+    activeaccount,
+    {
+      skip: !activeaccount,
+    }
+  );
+  useWebSocketNotifications(refetch);
   const today = new Date();
-  if (isLoading) <div>Loading</div>;
-  useEffect(() => {
-    const fetchCategorizedEmails = async () => {
-      try {
-        const response = await categorizedEmails(data.email).unwrap();
-        console.log("Categorized Emails:", response);
-      } catch (err) {
-        console.error("Error categorizing emails:", err);
-      }
-    };
-
-    if (data?.email) fetchCategorizedEmails();
-  }, [data, categorizedEmails]);
-
+  if (isLoading) return <div>Loading</div>;
   return (
     <>
       <div className="mt-[3%]">
@@ -49,9 +38,9 @@ const AllEmails = () => {
                   <div className="text-[17px] font-[200]">
                     {ele.from.split("<")[0]}
                   </div>
-                  <div className="text-[17px]">
+                  {/* <div className="text-[17px]">
                     {ele.subject.replace(/^"|"$/g, "")}
-                  </div>
+                  </div> */}
                   <div className="text-[12px]">{ele.snippet}</div>
                 </div>
                 <div className="w-10%">

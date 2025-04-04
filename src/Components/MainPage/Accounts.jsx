@@ -8,7 +8,6 @@ export default function Accounts() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-  console.log(location.pathname);
   const useremail = useSelector((state) => state.user.email);
   function activeAccountHandler(acc) {
     const obj = {

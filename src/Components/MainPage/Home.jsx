@@ -9,7 +9,6 @@ import { activeAcount } from "../../Store/Active/IsActive";
 const Home = () => {
   const dispatch = useDispatch();
   const { data, isError, isLoading, error } = useGetUserQuery();
-
   useEffect(() => {
     if (data) {
       console.log(data);
@@ -28,7 +27,6 @@ const Home = () => {
       dispatch(activeAcount(obj1));
     }
   }, [data?.fname, dispatch]);
-
   if (isError) {
     console.error("API Error:", error);
     return <div>Error: {error?.data?.message || "Something went wrong"}</div>;
