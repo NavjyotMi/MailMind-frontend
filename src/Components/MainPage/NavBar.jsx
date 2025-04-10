@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import { Mail } from "lucide-react";
-import { CircleChevronDown } from "lucide-react";
+import SearchBar from "./SearchBar";
 import { useSelector } from "react-redux";
 import { SendHorizontal } from "lucide-react";
-import { Link } from "react-router-dom";
 import defaults from "../../assets/defaults.svg";
+import { CircleChevronDown } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
 
 const NavBar = () => {
+  console.log("how many times the children run ");
+  const location = useLocation();
   const [open, setOpen] = useState(false);
   const user = useSelector((state) => state.user);
   function modalHandler() {
@@ -14,7 +17,7 @@ const NavBar = () => {
   }
   return (
     <div className="w-[20%] mr-1 h-screen mt-5 fixed top-0 pl-5">
-      <div className="border-1 border-gray-500 rounded-[10px] bg-[#141C25] p-2">
+      <div className="border-1 border-gray-700 rounded-[10px]  p-2">
         <div className="flex flex-row justify-between items-center gap-1">
           <div>
             <img
@@ -53,46 +56,84 @@ const NavBar = () => {
           </div>
         )}
       </div>
-      <div className="py-5 border-b border-dashed">
-        <button className="border w-[100%] py-2 rounded-[5px] ">Compose</button>
+      <div className="pt-5">
+        <SearchBar />
       </div>
 
       <div className="mt-5">
-        <div className="text-gray-300 mb-3">Home </div>
+        <div className="text-gray-300 mb-3 tracking-wide">Home </div>
         <div className="flex flex-col gap-3">
-          <div className="flex flex-row gap-3">
-            <Mail size={25} strokeWidth={1} />
+          <Link
+            to="/home"
+            className={`flex flex-row gap-3 tracking-wide py-2 px-1 rounded-md ${
+              location.pathname === "/home" ? "bg-[#1A1C21] " : ""
+            }`}
+          >
+            <Mail size={22} strokeWidth={1} />
             Inbox
-          </div>
-          <div className="flex flex-row gap-3">
-            <SendHorizontal size={25} strokeWidth={1} />
+          </Link>
+          <Link
+            to="sentemail"
+            className={`flex flex-row gap-3 tracking-wide py-2 px-1 rounded-md ${
+              location.pathname === "/home/sentemail" ? "bg-[#1A1C21] " : ""
+            }`}
+          >
+            <SendHorizontal size={22} strokeWidth={1} />
             Sent
-          </div>
+          </Link>
         </div>
 
-        <div className="text-gray-300 mt-5 mb-3">AI-Categorization</div>
+        <div className="text-gray-300 mt-5 mb-3 tracking-wide">
+          AI-Categorization
+        </div>
         <div>
           <ul className="flex flex-col gap-2">
-            <li className="text-[#4A90E2] hover:opacity-80 cursor-pointer">
-              Primary
-            </li>
-            <li className="text-[#7ED321] hover:opacity-80 cursor-pointer">
-              Personal
-            </li>
-            <li className="text-[#F5A623] hover:opacity-80 cursor-pointer">
+            <Link
+              to="/home/important"
+              className={`flex flex-row gap-3 tracking-wide py-2 px-1 rounded-md hover:opacity-80 cursor-pointer ${
+                location.pathname === "/home/important" ? "bg-[#1A1C21] " : ""
+              }`}
+            >
+              Important
+            </Link>
+            <Link
+              to="/home/social"
+              className={`flex flex-row gap-3 tracking-wide py-2 px-1 rounded-md hover:opacity-80 cursor-pointer ${
+                location.pathname === "/home/social" ? "bg-[#1A1C21] " : ""
+              }`}
+            >
+              Social
+            </Link>
+            <Link
+              to="/home/promotions"
+              className={`flex flex-row gap-3 tracking-wide py-2 px-1 rounded-md hover:opacity-80 cursor-pointer ${
+                location.pathname === "/home/promotions" ? "bg-[#1A1C21] " : ""
+              }`}
+            >
               Promotion
-            </li>
-            <li className="text-[#BD10E0] hover:opacity-80 cursor-pointer">
-              Span
-            </li>
-            <li className="text-[#D0021B] hover:opacity-80 cursor-pointer">
-              Professional
-            </li>
+            </Link>
+            <Link
+              to="/home/updates"
+              className={`flex flex-row gap-3 tracking-wide py-2 px-1 rounded-md hover:opacity-80 cursor-pointer ${
+                location.pathname === "/home/updates" ? "bg-[#1A1C21] " : ""
+              }`}
+            >
+              Updates
+            </Link>
+            <Link
+              to="/home/work"
+              className={`flex flex-row gap-3 tracking-wide py-2 px-1 rounded-md hover:opacity-80 cursor-pointer ${
+                location.pathname === "/home/work" ? "bg-[#1A1C21] " : ""
+              }`}
+            >
+              Work
+            </Link>
           </ul>
         </div>
       </div>
     </div>
   );
+  // return <div>nothing</div>;
 };
 
 export default NavBar;

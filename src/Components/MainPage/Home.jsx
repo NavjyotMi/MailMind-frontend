@@ -11,7 +11,6 @@ const Home = () => {
   const { data, isError, isLoading, error } = useGetUserQuery();
   useEffect(() => {
     if (data) {
-      console.log(data);
       const obj = {
         fname: data.fname,
         lname: data.lname,
@@ -26,7 +25,7 @@ const Home = () => {
       };
       dispatch(activeAcount(obj1));
     }
-  }, [data?.fname, dispatch]);
+  }, [data?.fname]);
   if (isError) {
     console.error("API Error:", error);
     return <div>Error: {error?.data?.message || "Something went wrong"}</div>;

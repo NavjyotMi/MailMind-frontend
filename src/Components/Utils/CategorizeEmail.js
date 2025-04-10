@@ -22,10 +22,8 @@ function useCategorizeEmail() {
             withCredentials: true,
           }
         );
-        console.log(finalData);
         const emailList = [user.email];
         user.linkedAccounts.map((ele) => emailList.push(ele.email));
-        console.log(emailList);
         if (finalData.data.size === 0 && emailList.length !== 0) {
           await axios.post(
             "http://localhost:5000/api/v1/user/categorize",
