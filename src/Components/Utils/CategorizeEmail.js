@@ -26,7 +26,7 @@ function useCategorizeEmail() {
         user.linkedAccounts.map((ele) => emailList.push(ele.email));
         if (finalData.data.size === 0 && emailList.length !== 0) {
           await axios.post(
-            "http://localhost:5000/api/v1/user/categorize",
+            "https://email-segregator-backend-1.onrender.com/api/v1/user/categorize",
             {
               body: { emailList },
             },

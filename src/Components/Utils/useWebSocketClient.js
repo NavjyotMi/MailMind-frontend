@@ -9,7 +9,7 @@ function useWebSocketNotifications(refetch) {
   useEffect(() => {
     if (!clientId) return;
     const socket = new WebSocket(
-      `ws://email-segregator-backend-1.onrender.com?clientId=${clientId}`
+      `wss://email-segregator-backend-1.onrender.com?clientId=${clientId}`
     );
 
     socket.onopen = () => console.log("Connected to WebSocket server");

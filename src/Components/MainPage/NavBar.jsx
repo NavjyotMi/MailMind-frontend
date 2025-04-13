@@ -6,6 +6,7 @@ import { SendHorizontal } from "lucide-react";
 import defaults from "../../assets/defaults.svg";
 import { CircleChevronDown } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
+import defaulticon from "../../assets/defaulticon.png";
 
 const NavBar = () => {
   console.log("how many times the children run ");
@@ -21,9 +22,10 @@ const NavBar = () => {
         <div className="flex flex-row justify-between items-center gap-1">
           <div>
             <img
-              src={user?.picture || defaults}
+              src={user?.picture || defaulticon}
               alt=""
               className="rounded-[50%] w-[2rem]"
+              crossorigin="anonymous"
             />
           </div>
           <div>
