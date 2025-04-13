@@ -17,7 +17,7 @@ function useCategorizeEmail() {
         hasRun.current = true;
         console.log("the email length is empty");
         const finalData = await axios.get(
-          "http://localhost:5000/api/v1/user/size",
+          "https://email-segregator-backend-1.onrender.com/api/v1/user/size",
           {
             withCredentials: true,
           }

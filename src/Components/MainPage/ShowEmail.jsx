@@ -16,7 +16,7 @@ function ShowEmail() {
     async function callThisFucntion() {
       console.log(id);
       const data = await axios.post(
-        `http://localhost:5000/api/v1/user/email/${id}`,
+        `https://email-segregator-backend-1.onrender.com/api/v1/user/email/${id}`,
         { email: activeAccount },
         { withCredentials: true }
       );

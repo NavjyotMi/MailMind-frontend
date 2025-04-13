@@ -4,9 +4,12 @@ import img from "../../assets/google.png";
 const AddAccount = () => {
   function handleSignup() {
     axios
-      .get("http://localhost:5000/api/v1/auth/addaccount", {
-        withCredentials: true,
-      })
+      .get(
+        "https://email-segregator-backend-1.onrender.com/api/v1/auth/addaccount",
+        {
+          withCredentials: true,
+        }
+      )
       .then((response) => {
         console.log(response);
         window.location.href = response.data.redirecturi;

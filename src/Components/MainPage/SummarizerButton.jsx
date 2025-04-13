@@ -10,7 +10,7 @@ function SummarizerButton({ body }) {
   useEffect(() => {
     async function summarize() {
       const data = await axios.post(
-        `http://localhost:5000/api/v1/user/summarize`,
+        `https://email-segregator-backend-1.onrender.com/api/v1/user/summarize`,
         { email: activeAccount, body },
         { withCredentials: true }
       );

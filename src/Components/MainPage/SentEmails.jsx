@@ -9,7 +9,7 @@ function SentEmails() {
   useEffect(() => {
     async function getallSentEmail(params) {
       const emails = await axios.get(
-        `http://localhost:5000/api/v1/user/sentemail/${activeAccount}`,
+        `https://email-segregator-backend-1.onrender.com/api/v1/user/sentemail/${activeAccount}`,
         { withCredentials: true }
       );
 
