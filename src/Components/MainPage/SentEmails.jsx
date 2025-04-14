@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import ShowEmail from "./ShowEmail";
 import EmailList from "./EmailList";
 function SentEmails() {
   const [allemails, setAllEmails] = useState(null);

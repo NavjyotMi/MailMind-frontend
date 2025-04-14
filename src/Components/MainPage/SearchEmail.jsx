@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useGetEmailsQuery } from "../../Store/Email/EmailApi";
 import { useSelector } from "react-redux";
 import EmailList from "./EmailList";

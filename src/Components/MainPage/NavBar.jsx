@@ -3,7 +3,6 @@ import { Mail } from "lucide-react";
 import SearchBar from "./SearchBar";
 import { useSelector } from "react-redux";
 import { SendHorizontal } from "lucide-react";
-import defaults from "../../assets/defaults.svg";
 import { CircleChevronDown } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import defaulticon from "../../assets/defaulticon.png";
