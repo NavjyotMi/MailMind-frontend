@@ -8,7 +8,7 @@ export default defineConfig({
   resolve: {
     alias: {
       // Ensure react-redux is correctly resolved
-      "react-redux": require.resolve("react-redux"),
+      "react-redux": "react-redux",
     },
   },
 });
