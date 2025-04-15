@@ -42,7 +42,7 @@ MailMind Frontend simplifies the entire process by providing:
 
 
 ### Video Demo
-[View Demo](https://www.loom.com/share/bba30c7b468942be938979f02c6684a8?sid=0bfaa500-f9aa-48a4-92d8-177378401f45)
+[View Demo]([https://youtu.be/4PCUY1yUOOg])
 
 ## 🔧 Technical Highlights
 
